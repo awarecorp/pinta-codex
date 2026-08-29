@@ -4,13 +4,13 @@
 // shape that does NOT carry the manager's `userMessage` field (codex has never
 // surfaced it). We map core's richer result down to codex's historical shape.
 import { evaluateGuard as coreEvaluateGuard } from "@pinta-ai/core";
+import type { GuardInput } from "@pinta-ai/core";
 
-export interface GuardInput {
-  spanId: string;
-  toolName?: string;
-  toolInput?: unknown;
-  rawTextFields?: Record<string, string>;
-}
+// `GuardResult` below is down-projected on purpose — codex has never surfaced
+// `userMessage`. `GuardInput` had no such reason: it was a verbatim copy of
+// core's, and a copy of a wire type is how one end quietly stops sending a
+// field the other end still reads. Re-exported so the two cannot disagree.
+export type { GuardInput };
 
 export interface GuardResult {
   decision: 'ALLOW' | 'DENY' | 'REVIEW';

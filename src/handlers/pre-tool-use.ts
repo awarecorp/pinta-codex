@@ -16,6 +16,8 @@ export async function handlePreToolUse(
     {
       spanId: event.session_id ?? "unknown",
       toolName: event.tool_name,
+      method: event.hook_event_name,
+      cwd: event.cwd,
       toolInput: event.tool_input,
       rawTextFields: { toolInput: rawToolInput },
     },
